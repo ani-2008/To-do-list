@@ -19,10 +19,14 @@ def delete_task(choice):
     del_task = False
     del_status = False
     
-    string_count = False
+    string_count = "0"
     if choice == "y":
         ask_label = input("Label:").strip()
-        if ask_label in todo_dict:
+        if todo_dict=={}:
+            print("List is empty")
+            return False
+        
+        elif ask_label in todo_dict:
             ask_task = input("Task:").strip()
             for i in todo_dict[ask_label].keys():
                 
@@ -34,13 +38,12 @@ def delete_task(choice):
                     break
                 else:
                     continue
-                    
-        elif todo_dict=={}:
-            print("List is empty")
-            return False
+
         else:
             print("Label not found")
             return False
+
+
     if del_task and del_status and string_count:
         
         del todo_dict[ask_label][string_count][0]
@@ -72,11 +75,13 @@ def main():
         
         print("To exit type exit")
         print("To display type display")
-        print("To update your task you need to exit or display")
         choice = input("Do you want to delete any task ? (y/n)").lower()
         if choice == "y":
-            todo_dict,string_count = delete_task('y')
-            
+            try:
+                todo_dict,string_count = delete_task('y')
+            except TypeError:
+                todo_dict = todo_dict
+                string_count = "0"
             print(change_dict_json(todo_dict))
             jsonTodo_dict = json.dumps(todo_dict)
             
