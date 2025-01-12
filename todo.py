@@ -35,6 +35,9 @@ def delete_task(choice):
                 else:
                     continue
                     
+        elif todo_dict=={}:
+            print("List is empty")
+            return False
         else:
             print("Label not found")
             return False
