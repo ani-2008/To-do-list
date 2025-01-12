@@ -64,6 +64,7 @@ def delete_task(choice):
 
     return todo_dict,string_count
 
+    
 def change_dict_json(obj):
     return ((((((json.dumps(obj,indent=3)).replace("{","")).replace("}",""))).replace("[","")).replace("]","")).replace(",","")
 
@@ -85,13 +86,12 @@ def main():
                 string_count = "0"
             print(change_dict_json(todo_dict))
             jsonTodo_dict = json.dumps(todo_dict)
-            
             with open("list.json","w") as f:
                 data = f.write(jsonTodo_dict)
             with open("list.json") as f:
                 data = f.read()
             todo_dict = json.loads(data)
-
+            
         elif choice == "n":
             choice = input("Do you want to add any task ?\nIf no then you can see your current tasks (y/n)").lower()
             if choice == "y":
@@ -138,6 +138,7 @@ def main():
                         else:
                             count+=1
                             todo_dict[label].update({str(count):[task,status]})
+                
             elif choice == "n":
                 print(change_dict_json(todo_dict))
                 continue
