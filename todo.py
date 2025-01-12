@@ -21,27 +21,28 @@ def delete_task(choice):
     
     string_count = "0"
     if choice == "y":
-        ask_label = input("Label:").strip()
+        
         if todo_dict=={}:
             print("List is empty")
             return False
-        
-        elif ask_label in todo_dict:
-            ask_task = input("Task:").strip()
-            for i in todo_dict[ask_label].keys():
-                
-                if ask_task in todo_dict[ask_label][i]:
-                    string_count = i
-                    del_task = todo_dict[ask_label][i][0]
-                    del_status =  todo_dict[ask_label][i][1]
-                    
-                    break
-                else:
-                    continue
-
         else:
-            print("Label not found")
-            return False
+            ask_label = input("Label:").strip()
+            if ask_label in todo_dict:
+                ask_task = input("Task:").strip()
+                for i in todo_dict[ask_label].keys():
+                    
+                    if ask_task in todo_dict[ask_label][i]:
+                        string_count = i
+                        del_task = todo_dict[ask_label][i][0]
+                        del_status =  todo_dict[ask_label][i][1]
+                        
+                        break
+                    else:
+                        continue
+
+            else:
+                print("Label not found")
+                return False
 
 
     if del_task and del_status and string_count:
