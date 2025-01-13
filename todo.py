@@ -113,6 +113,7 @@ def main():
                     count +=1
                 
                 else:
+                    
                     count = int(string_count)
                     if count != 0:
                         
@@ -132,7 +133,7 @@ def main():
                         else:
                             count+=1
                             todo_dict[label].update({str(count):[task,status]})
-                
+                string_count = str(int(string_count) + 1)
             elif choice == "n":
                 print(change_dict_json(todo_dict))
                 continue
