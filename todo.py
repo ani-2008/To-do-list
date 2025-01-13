@@ -56,12 +56,6 @@ def delete_task(choice):
     if todo_dict[ask_label] == {}:
         del todo_dict[ask_label]
     
-    new_dict = {}
-    list_c = []
-    for str_c in todo_dict[ask_label].keys():
-        list_c.append(int(str_c))
-    
-
     return todo_dict,string_count
 
     
