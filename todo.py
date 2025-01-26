@@ -1,5 +1,5 @@
 import json
-
+import sys
 with open("list.json") as f:
     data = f.read()
 
@@ -58,9 +58,25 @@ def delete_task(choice):
     
     return todo_dict,string_count
 
-    
+
 def change_dict_json(obj):
-    return ((((((json.dumps(obj,indent=3)).replace("{","")).replace("}",""))).replace("[","")).replace("]","")).replace(",","")
+    new_dict = {}
+    
+    for i in obj:
+        new_dict[i] = list(obj[i].values())
+        
+    return (((((json.dumps(new_dict,indent=3)).replace("{","")).replace("}","")).replace("[","")).replace("]","")).replace(",","")
+
+
+if len(sys.argv) == 2 and sys.argv[1].lower().strip() == "display":
+    print(change_dict_json(todo_dict))
+elif len(sys.argv) == 2 and sys.argv[1].lower().strip() == "clear":
+    del todo_dict
+    todo_dict = {}
+    jsonTodo_dict = json.dumps(todo_dict)
+    with open("list.json","w") as f:
+        data = f.write(jsonTodo_dict)
+    
 
 def main():
     global todo_dict
@@ -93,6 +109,7 @@ def main():
                 if label.lower() == "exit":
                     break
                 elif label.lower() == "display":
+                    
                     print(change_dict_json(todo_dict))
                     continue
                 task = input("Task: ").strip()
